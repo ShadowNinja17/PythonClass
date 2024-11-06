@@ -1,0 +1,85 @@
+import sys #Used to end the game
+
+slots = ["1","2","3","4","5","6","7","8","9"] #The slots to put an X or O
+
+def printBoard():
+	print("-------")
+	print("|" + slots[0] + "|" + slots[1] + "|" + slots[2] + "|")
+	print("-------")
+	print("|" + slots[3] + "|" + slots[4] + "|" + slots[5] + "|")
+	print("-------")
+	print("|" + slots[6] + "|" + slots[7] + "|" + slots[8] + "|")
+	print("-------")
+
+printBoard()
+
+def oneTurn():
+  	
+  try:
+    slot = int(input("Player 1, Where would you like to play? \n >>"))
+    if slots[slot-1].isdigit():
+      slots[slot-1] = "X"
+    else:
+      print("Sorry, someone already played there.")
+      oneTurn()
+    printBoard()
+  except:
+    print("Sorry that character is incorrect, please, try again.")
+    oneTurn()
+    
+    def twoTurn():
+      
+      try:
+        slot = int(input("Player 2, Where would you like to play? \n >>"))
+        if slots[slot-1].isdigit():
+          slots[slot-1] = "0"
+        else:
+          print("Sorry, someone already played there.")
+          twoTurn()
+        printBoard()
+      except:
+        print("Sorry that character is incorrect, please, try again.")
+        twoTurn()
+        
+      def checkWin():
+        for x in range(0,3):
+       	  z = x * 3
+          if(slots[z] == slots[z + 1] and slots[z + 2]):
+            if slots[z] == "X":
+              print("Player 1 Wins!")
+              sys.exit()
+            else:
+              print("Player 2 Wins!")
+              sys.exit()
+          if(slots[0] == slots[4] and slots[0] == slots[8]):
+            if slots[4] == "X":
+              print("Player 1 Wins!")
+              sys.exit()
+            else:
+              print("Player 2 Wins!")
+              sys.exit()
+          if(slots[2] == slots[4] and slots [2] == slots[6]):
+            if slots[4] == "X":
+              print("Player 1 Wins!")
+              sys.exit()
+            else:
+              print("Player 2 Wins")
+              sys.exit()
+
+        def checkDraw():
+          	count = 0
+            for i in range(9):
+              	if slots[i].isalpha():
+                  	count += 1
+            if count== 9:
+              	print("It's a draw!")
+                sys.exit()
+                
+        printBoard()
+        while True:
+          	oneTurn()
+            checkWin()
+            checkDraw()
+            twoTurn()
+            checkWin()
+            checkDraw()
